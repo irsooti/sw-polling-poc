@@ -2,6 +2,8 @@ const NEW_MESSAGE_LISTENER = 'NEW_MESSAGE_LISTENER';
 const RESET_MESSAGE_LISTENER = 'RESET_MESSAGE_LISTENER';
 const KEY_MESSAGE = 'message';
 
+const broadcast = new BroadcastChannel(KEY_MESSAGE);
+
 const App = (() => {
   // Listen for new messages and update the DOM
   listenForNewMessage((data) => {
@@ -46,19 +48,23 @@ function startPolling() {
 }
 
 function onMessageReceive(ev) {
-  if (ev.key !== KEY_MESSAGE || ev.newValue === null) return;
+  // if (ev.key !== KEY_MESSAGE || ev.newValue === null) return;
 
-  var message = JSON.parse(ev.newValue);
+  // var message = JSON.parse(ev.newValue);
 
-  window.dispatchEvent(
-    new CustomEvent(NEW_MESSAGE_LISTENER, { detail: message })
-  );
+  // window.dispatchEvent(
+  //   new CustomEvent(NEW_MESSAGE_LISTENER, { detail: message })
+  // );
+
+  dispatchNewMessage(ev.data);
+
   window.dispatchEvent(new CustomEvent(RESET_MESSAGE_LISTENER));
 }
 
 function broadcastMessage(message) {
-  window.localStorage.setItem(KEY_MESSAGE, JSON.stringify(message));
-  window.localStorage.removeItem(KEY_MESSAGE);
+  // window.localStorage.setItem(KEY_MESSAGE, JSON.stringify(message));
+  // window.localStorage.removeItem(KEY_MESSAGE);
+  broadcast.postMessage(message);
   return message;
 }
 
@@ -72,7 +78,8 @@ function dispatchNewMessage(data) {
 }
 
 function listenForOtherTabs() {
-  window.addEventListener('storage', onMessageReceive);
+  // window.addEventListener('storage', onMessageReceive);
+  broadcast.addEventListener('message', onMessageReceive);
 }
 
 function listenForNewMessage(callback) {
