@@ -3,7 +3,7 @@
 To run this application, install the dependencies and run the following:
 
 ```bash
-npm install # or yarn
+npm install # or pnpm if you have it
 npm start
 ```
 
