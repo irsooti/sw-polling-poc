@@ -62,10 +62,6 @@ function broadcastMessage(message) {
   return message;
 }
 
-function dispatchNewMessage(data) {
-  return dispatchNewMessage(data);
-}
-
 function dispatchResetPolling() {
   window.dispatchEvent(new CustomEvent(RESET_MESSAGE_LISTENER));
 }
