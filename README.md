@@ -1,0 +1,1 @@
+# Optimize polling interval for the current web server
