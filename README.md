@@ -1,6 +1,6 @@
 # Optimize polling interval for the current web server
 
-To run this application, install the dependencies and run the following:
+To run this application run the following:
 
 ```bash
 npm install # or pnpm if you have it
