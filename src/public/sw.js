@@ -10,20 +10,6 @@ self.addEventListener('install', (event) => {
   startPolling();
 });
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(async () => {
-    const allClients = await clients.matchAll({
-      includeUncontrolled: true,
-    });
-
-    console.log(allClients.map((c) => c.url));
-  });
-});
-
-self.addEventListener('sync', (event) => {
-  console.log('sync event', event);
-});
-
 function broadcastMessage(message) {
   broadcast.postMessage(message);
 }
