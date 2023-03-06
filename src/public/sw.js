@@ -1,9 +1,10 @@
 const KEY_MESSAGE = 'message';
 const broadcast = new BroadcastChannel(KEY_MESSAGE);
 
-let abortController = new AbortController();
-let interval = null;
+// The polling instance id AKA the interval id
+let pollingInstanceId = null;
 
+// When the service worker is installed, let's start polling
 self.addEventListener('install', (event) => {
   self.skipWaiting();
 
@@ -14,28 +15,29 @@ function broadcastMessage(message) {
   broadcast.postMessage(message);
 }
 
-function fetchApi(abortController) {
-  fetch('/api/', { signal: abortController.signal })
+function fetchApi(int) {
+  console.log(`fetching polling instance [interval: ${int}]`, int);
+  fetch('/api/')
     .then((r) => r.text())
-    .then(broadcastMessage)
-    .catch((err) => {
-      // ? important to check if the error is an abort error, or else it will log an error
-      if (err.name === 'AbortError') {
-        console.log('Aborted! This is expected.', err);
-        return;
-      }
-      console.error(err);
-    });
+    .then(broadcastMessage);
+
+  // We don't care about errors here
 }
 
 function startPolling() {
-  interval = setInterval(() => fetchApi(abortController), 5000);
+  if (pollingInstanceId === null) {
+    // actually, this number does not change, but it's just an example
+    pollingInstanceId = setInterval(() => fetchApi(pollingInstanceId), 5000);
+  }
 }
 
 self.addEventListener('message', (event) => {
   if (event.data === 'start') {
-    console.log(interval);
-    if (interval !== null) clearInterval(interval);
+    // TBD
+    // we also ask to service worker to start polling immediately
+    // to avoid waiting for the next interval?
     startPolling();
+    // Anyway, polling is started when the service worker is installed/activated
+    // but does not start immediately
   }
 });

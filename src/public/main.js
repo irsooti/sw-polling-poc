@@ -22,6 +22,7 @@ if ('serviceWorker' in navigator) {
       } else if (registration.waiting) {
         console.log('Service worker installed');
       } else if (registration.active) {
+        console.log('Service worker active');
         registration.active.postMessage('start');
       }
     })
