@@ -19,9 +19,11 @@ function fetchApi(int) {
   console.log(`fetching polling instance [interval: ${int}]`, int);
   fetch('/api/')
     .then((r) => r.text())
-    .then(broadcastMessage);
-
-  // We don't care about errors here
+    .then(broadcastMessage)
+    .catch((err) => {
+      // We don't care about errors here, just display them
+      console.log('error', err);
+    });
 }
 
 function startPolling() {
