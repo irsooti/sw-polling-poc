@@ -24,7 +24,14 @@ Il problema nel fare ciò è che ogni client fa questa richiesta riferendosi ad 
 
 Per canale di comunicazione si intende il Broadcast Channel API che permette di inviare messaggi a tutti i client che hanno registrato un listener sul canale.
 
-Ogni client quindi verifica se il service worker è attivo e se non lo è lo attiva e gli dice (per mezzo dell'interfaccia ServiceWorkerGlobalScope) che deve fare polling. 
+Ogni client quindi verifica se il service worker è attivo e se non lo è lo attiva e gli dice (per mezzo dell'interfaccia ServiceWorkerGlobalScope) che deve fare polling.
+
+## Browser supportati e possibili problematiche
+I service worker sono una tecnologia abbastanza consolidata, [caniuse](https://caniuse.com/serviceworkers) mostra un ampio supporto verso tutti i browser eccezion fatta per opera mini che rappresenta lo 0,99% dell'uso globale ed internet explorer 0,62%.
+Le broadcast sono supportati [praticamente allo stesso modo](https://caniuse.com/?search=broadcast), solo che per quanto riguarda opera mini il supporto è sconosciuto.
+Non ho evidenza di possibili problematiche.
+
 ## Useful links
 - Broadcast Channel API: https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API
 - Service Worker API: https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
+- Is service worker ready? https://jakearchibald.github.io/isserviceworkerready
