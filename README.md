@@ -12,7 +12,7 @@ Then open [http://localhost:3000/](http://localhost:3000/) to see your app.
 
 ## How it works (in italian)
 
-![Docs](./docs/sw.svg)
+![Docs](./docs/sw.png)
 
 ### Panoramica del problema
 Supponiamo di avere n client (per client si intendono tab, finestre o iframe dello stesso url) che devono fare polling ad un server. Il server risponde con un testo, il client quindi utilizza questo testo per disporlo sul DOM. Il server risponde con un testo diverso ogni 5 secondi. Il client quindi deve fare polling ogni 5 secondi.

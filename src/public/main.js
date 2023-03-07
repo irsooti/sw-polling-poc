@@ -1,4 +1,4 @@
-const KEY_MESSAGE = 'message';
+const KEY_MESSAGE = 'messaging::polling';
 const broadcast = new BroadcastChannel(KEY_MESSAGE);
 
 const App = (() => {
